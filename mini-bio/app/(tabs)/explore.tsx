@@ -17,7 +17,7 @@ export default function TabTwoScreen() {
     {
       titulo: "Adotaí",
       desc: "Aplicativo de match para pets",
-      img: require("@/assets/images/yomu.png")
+      img: require("@/assets/images/adotai.jpg")
     },
   ]
 
