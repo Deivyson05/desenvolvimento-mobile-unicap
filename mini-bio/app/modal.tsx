@@ -1,29 +1,31 @@
 import { Link } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { useRouter } from 'expo-router';
+import { getData } from '@/scripts/saveData';
+import { useEffect, useState } from 'react';
+import { projetos } from '@/constants/projetos';
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-
-export default function ModalScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">This is a modal</ThemedText>
-      <Link href="/" dismissTo style={styles.link}>
-        <ThemedText type="link">Go to home screen</ThemedText>
-      </Link>
-    </ThemedView>
-  );
+interface Projeto {
+  titulo: string;
+  desc: string;
+  img: any;
+  about: () => React.JSX.Element;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-});
+export default function ModalScreen() {
+  const [proj, setProjeto] = useState<Projeto | null>(null);
+  useEffect(() => {
+    async function load() {
+      const projetoTitulo = await getData('projeto');
+      const projetoEncontrado = projetos.find(p => p.titulo === projetoTitulo) || null;
+      setProjeto(projetoEncontrado);
+    }
+    load();
+  }, []);
+  const router = useRouter();
+  return (
+    <ScrollView className='p-4'>
+      {proj != null ? proj.about() : null}
+    </ScrollView>
+  );
+}

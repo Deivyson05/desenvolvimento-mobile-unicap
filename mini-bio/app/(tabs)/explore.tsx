@@ -1,25 +1,10 @@
 import { CardProjeto } from '@/components/cardProjeto';
 import { Image } from 'expo-image';
 import { Platform, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { projetos } from '@/constants/projetos';
 
 export default function TabTwoScreen() {
-  const projetos = [
-    {
-      titulo: "Combogó",
-      desc: "Landingpage para a agência de jogos da unicap",
-      img: require("@/assets/images/combogo.png")
-    },
-    {
-      titulo: "Yomu",
-      desc: "Aplicativo de gamificação da leitura",
-      img: require("@/assets/images/yomu.png")
-    },
-    {
-      titulo: "Adotaí",
-      desc: "Aplicativo de match para pets",
-      img: require("@/assets/images/adotai.jpg")
-    },
-  ]
+  
 
 
   return (
